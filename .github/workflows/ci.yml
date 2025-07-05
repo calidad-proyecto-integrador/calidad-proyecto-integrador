@@ -1,0 +1,44 @@
+name: Maven CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Clonar el repositorio
+      - name: Checkout del código
+        uses: actions/checkout@v4 # Actualizado a la última versión
+
+      # Configurar JDK
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      # Ejecutar los plugins
+      - name: Build and Test
+        run: mvn clean install
+
+      # Subir artefactos generados
+      - name: Get version from pom.xml
+        id: get-version
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Upload artifact dynamically
+        uses: actions/upload-artifact@v4
+        with:
+          name: calidad-proyecto-integrador-${{ env.VERSION }}
+          path: |
+            target/calidad-proyecto-integrador-${{ env.VERSION }}.jar
