@@ -61,3 +61,5 @@ jobs:
             target/site/jacoco/index.html
             target/site/checkstyle.html
             target/site/pmd.html
+            target/site/css
+            target/site/images
