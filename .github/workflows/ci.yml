@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+      - feature/*
   pull_request:
     branches:
       - main
+      - feature/*
 
 jobs:
   build:
@@ -28,6 +30,20 @@ jobs:
       # Ejecutar los plugins
       - name: Build and Test
         run: mvn clean install
+
+      # Ejecutar Checkstyle
+      - name: Checkstyle Analysis
+        run: mvn checkstyle:checkstyle
+        continue-on-error: true
+
+      # Ejecutar PMD
+      - name: PMD Analysis
+        run: mvn pmd:check
+        continue-on-error: true
+
+      # Ejecutar JaCoco
+      - name: JaCoCo Coverage Report
+        run: mvn jacoco:report
 
       # Subir artefactos generados
       - name: Get version from pom.xml
