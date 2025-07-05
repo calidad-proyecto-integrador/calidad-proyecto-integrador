@@ -58,7 +58,7 @@ jobs:
           name: calidad-proyecto-integrador-${{ env.VERSION }}
           path: |
             target/calidad-proyecto-integrador-${{ env.VERSION }}.jar
-            target/site/jacoco/index.html
+            target/site/jacoco
             target/site/checkstyle.html
             target/site/pmd.html
             target/site/css
