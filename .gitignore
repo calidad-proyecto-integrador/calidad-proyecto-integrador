@@ -19,6 +19,10 @@ out/
 # BlueJ files
 *.ctxt
 
+# ENVIRONMENT variables
+.env
+*.env.*
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
