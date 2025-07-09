@@ -23,6 +23,7 @@ public class OrderManager {
         OrderManager om = new OrderManager();
         om.addOrder("Alice", "Laptop");
         om.addOrder("Bob", "Phone");
+        System.out.println("algo");
         om.listOrders();
     }
 }
